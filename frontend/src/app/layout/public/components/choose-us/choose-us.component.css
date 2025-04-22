@@ -1,0 +1,11 @@
+.part1,
+.part2,
+.part3,
+.part4 {
+  flex: 25%;
+}
+.bi {
+  padding: 12px;
+  background-color: #d4a6b6bf;
+  border-radius: 50%;
+}

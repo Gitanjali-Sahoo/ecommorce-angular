@@ -1,1 +1,57 @@
-<p>new-product works!</p>
+<div class="d-flex flex-column flex-md-row">
+  <app-sidebar />
+  <div class="flex-grow-1 mx-5 my-2">
+    <h4>New Products</h4>
+    <form class="row g-3 w-75 mt-1">
+      <div class="col-md-6">
+        <label for="name" class="form-label">Name</label>
+        <input type="text" class="form-control" id="name" required />
+      </div>
+      <div class="col-md-6">
+        <label for="price" class="form-label">Price</label>
+        <input type="number" class="form-control" id="price" required />
+      </div>
+      <div class="col-12">
+        <label for="image" class="form-label">Image</label>
+        <input type="text" class="form-control" id="image" required />
+      </div>
+      <div class="col-12">
+        <label for="description" class="form-label">Description</label>
+        <input
+          type="text"
+          class="form-control"
+          id="description"
+          placeholder="Describe about the product...."
+          required
+        />
+      </div>
+      <div class="col-md-6">
+        <label for="date" class="form-label">Date</label>
+        <input type="date" class="form-control" id="date" required />
+      </div>
+      <div class="col-md-4">
+        <label for="category" class="form-label">Category</label>
+        <select id="category" class="form-select" required>
+          <option selected>Skin Care</option>
+          <option>Perfume</option>
+          <option>Lip Care</option>
+          <option>Nail Care</option>
+        </select>
+      </div>
+      <div class="col-md-2">
+        <label for="sku" class="form-label">SKU</label>
+        <input
+          type="text"
+          class="form-control"
+          id="sku"
+          pattern="[A-Z]{3}[0-9]{3}"
+          required
+        />
+      </div>
+
+      <div class="col-12">
+        <button type="submit" class="btn btn-primary">Add Product</button>
+      </div>
+    </form>
+  </div>
+</div>

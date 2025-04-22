@@ -1,1 +1,35 @@
-<p>card works!</p>
+<div>
+  <div class="text-center mt-3">
+    <p>POPULAR PRODUCTS</p>
+    <h2 class="fs-1">Trending Now</h2>
+  </div>
+  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-3 m-2">
+    <div class="col" *ngFor="let product of products">
+      <div class="card">
+        <span
+          *ngIf="product.isNew"
+          class="badge rounded-pill text-bg-light position-absolute"
+          >New</span
+        >
+        <img
+          src="{{ product.image }}"
+          class="card-img-top"
+          alt="{{ product.name }}"
+        />
+        <div class="card-body">
+          <h5 class="card-title" [routerLink]="['/products', product.id]">
+            {{ product.name }}
+          </h5>
+          <p class="card-text">{{ product.price }} Sek</p>
+          <div>
+            <i class="bi bi-star"></i>
+            <i class="bi bi-star"></i>
+            <i class="bi bi-star"></i>
+            <i class="bi bi-star"></i>
+            <i class="bi bi-star"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

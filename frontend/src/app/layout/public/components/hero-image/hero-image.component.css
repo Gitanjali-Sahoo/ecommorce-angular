@@ -1,0 +1,18 @@
+.bg-image {
+  background-image: url("https://websitedemos.net/be-bold-beauty-store-04/wp-content/uploads/sites/1117/2022/08/hero.jpg"); /* adjust your path */
+
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-height: 90vh;
+  padding-top: 35px;
+  padding-bottom: 35px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.hero-content {
+  margin-right: 65%;
+  padding-top: 100px;
+  padding-bottom: 30px;
+}

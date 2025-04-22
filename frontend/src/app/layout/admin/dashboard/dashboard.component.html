@@ -1,1 +1,37 @@
-<p>dashboard works!</p>
+<div class="d-flex flex-column flex-md-row">
+  <app-sidebar />
+  <!-- <div class="text-white p-5 sidebar fs-4">Products</div> -->
+  <div class="flex-grow-1 py-3 px-5">
+    <div class="d-flex justify-content-between py-3">
+      <h3>Products</h3>
+      <button
+        class="btn btn-success"
+        routerLink="/admin/newProduct"
+        routerLinkActive="active"
+      >
+        New Products
+      </button>
+    </div>
+
+    <table class="table table-hover table-striped-columns">
+      <thead>
+        <tr>
+          <th scope="col">Sl No.</th>
+          <th scope="col">Name</th>
+          <th scope="col">SKU</th>
+          <th scope="col">Price</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody *ngFor="let product of products">
+        <tr>
+          <th scope="row">{{ product.id }}</th>
+          <td>{{ product.name }}</td>
+          <td>{{ product.sku }}</td>
+          <td>{{ product.price }} Sek</td>
+          <td class="text-center"><i class="bi bi-trash3"></i></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,10 @@
+.sidebar {
+  height: 90vh;
+  background-color: #2d4955;
+}
+@media (max-width: 768px) {
+  .sidebar {
+    height: 20vh;
+    text-align: center;
+  }
+}

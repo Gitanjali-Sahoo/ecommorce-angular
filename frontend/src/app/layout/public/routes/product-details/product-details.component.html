@@ -1,1 +1,13 @@
-<p>product-details works!</p>
+<div class="m-4">
+  <div class="d-flex justify-content-center">
+    <img src="{{ product.image }}" alt="{{ product.name }}" class="w-50" />
+
+    <div>
+      <h5>{{ product.name }}</h5>
+      <h6>{{ product.price }}</h6>
+    </div>
+  </div>
+  <div>
+    <p>{{ product.description }}</p>
+  </div>
+</div>
