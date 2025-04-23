@@ -12,6 +12,7 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 export class NewProductComponent {
   private productService = inject(ProductService);
   productForm!: FormGroup;
+
   ngOnInit() {
     this.productForm = new FormGroup({
       name: new FormControl(''),
@@ -26,8 +27,7 @@ export class NewProductComponent {
   onSubmit() {
     const product = this.productForm.value;
     this.productService.postNewProduct(product).subscribe((response) => {
-      console.log(response);
+      const message = response.message;
     });
-    console.log(product);
   }
 }

@@ -20,7 +20,11 @@ export class ProductService {
   }
 
   //Post a product to backend
-  postNewProduct(newProduct: Product): Observable<Product> {
-    return this.http.post<Product>('/api/products', newProduct);
+  postNewProduct(newProduct: Product): Observable<{ message: string }> {
+    return this.http.post<{ message: string }>('/api/products', newProduct);
+  }
+  //Delete a product from backend DB
+  deleteProduct(id: number): Observable<{ message: string }> {
+    return this.http.delete<{ message: string }>(`/api/products/${id}`);
   }
 }

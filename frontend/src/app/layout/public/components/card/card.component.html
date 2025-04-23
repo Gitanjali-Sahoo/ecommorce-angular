@@ -17,8 +17,12 @@
           [alt]="product.name"
         />
         <div class="card-body">
-          <h5 class="card-title" [routerLink]="['/products', product.id]">
-            {{ product.name }}
+          <h5 class="card-title cursor-pointer">
+            <a
+              class="cursor-pointer text-decoration-none text-black"
+              [routerLink]="['/products', product.id]"
+              >{{ product.name }}</a
+            >
           </h5>
           <p class="card-text">{{ product.price }} Sek</p>
           <div>

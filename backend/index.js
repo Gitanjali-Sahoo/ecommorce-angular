@@ -75,12 +75,11 @@ app.get("/api/products/:id", (req, res) => {
 //Delete a product from db
 app.delete("/api/products/:id", (req, res) => {
   const id = req.params.id;
-
   const select = db.prepare(`
 DELETE FROM products  WHERE id = ?
     `);
   const rows = select.run(id);
-  if (rows > 0) {
+  if (rows.changes > 0) {
     res.json({ message: "Product has deleted successfully" });
   } else {
     res.status(404).json({ message: "Product not found" });
