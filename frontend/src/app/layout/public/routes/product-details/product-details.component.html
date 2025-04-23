@@ -1,13 +1,29 @@
-<div class="m-4">
-  <div class="d-flex justify-content-center">
-    <img src="{{ product.image }}" alt="{{ product.name }}" class="w-50" />
+<div class="container my-5" *ngIf="product">
+  <div class="row g-5 align-items-center">
+    <div class="col-12 col-md-6 text-center">
+      <img
+        [src]="product.image"
+        [alt]="product.name"
+        class="img-fluid rounded shadow"
+        style="max-height: 500px; object-fit: fill; width: 100%"
+      />
+    </div>
 
-    <div>
-      <h5>{{ product.name }}</h5>
-      <h6>{{ product.price }}</h6>
+    <div class="col-12 col-md-6">
+      <p class="mb-1">{{ product.category }}</p>
+      <h2 class="fw-bold">{{ product.name }}</h2>
+      <h4 class="text-success fw-semibold mb-3">{{ product.price }} SEK</h4>
+      <button class="btn btn-dark fw-bold px-4 py-2 mb-3">ADD TO CART</button>
+      <hr class="my-3" />
+      <p class="mb-0">
+        <span class="text-muted">Category: </span>
+        <span class="fw-semibold">{{ product.category }}</span>
+      </p>
     </div>
   </div>
-  <div>
-    <p>{{ product.description }}</p>
+
+  <div class="mt-5">
+    <h4 class="mb-3">More about the product</h4>
+    <p class="text-secondary">{{ product.description }}</p>
   </div>
 </div>
