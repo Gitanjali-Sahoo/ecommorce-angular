@@ -5,6 +5,7 @@ import { NewProductComponent } from './layout/admin/new-product/new-product.comp
 import { MainLayoutComponent } from './layout/public/main-layout/main-layout.component';
 import { HomeComponent } from './layout/public/routes/home/home.component';
 import { ProductDetailsComponent } from './layout/public/routes/product-details/product-details.component';
+import { CartComponent } from './layout/public/routes/cart/cart.component';
 
 export const routes: Routes = [
   {
@@ -27,6 +28,7 @@ export const routes: Routes = [
     children: [
       { path: '', component: HomeComponent },
       { path: 'products/:id', component: ProductDetailsComponent },
+      { path: 'cart', component: CartComponent },
     ],
   },
 ];

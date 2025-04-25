@@ -1,0 +1,8 @@
+CREATE TABLE IF NOT EXISTS cart (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  product_id INTEGER,
+  quantity INTEGER,
+  session_id TEXT,
+  createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (product_id) REFERENCES products(id)
+);

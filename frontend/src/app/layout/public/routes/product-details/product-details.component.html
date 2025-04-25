@@ -13,7 +13,12 @@
       <p class="mb-1">{{ product.category }}</p>
       <h2 class="fw-bold">{{ product.name }}</h2>
       <h4 class="text-success fw-semibold mb-3">{{ product.price }} SEK</h4>
-      <button class="btn btn-dark fw-bold px-4 py-2 mb-3">ADD TO CART</button>
+      <button
+        class="btn btn-dark fw-bold px-4 py-2 mb-3"
+        (click)="addProductToCart()"
+      >
+        ADD TO CART
+      </button>
       <hr class="my-3" />
       <p class="mb-0">
         <span class="text-muted">Category: </span>

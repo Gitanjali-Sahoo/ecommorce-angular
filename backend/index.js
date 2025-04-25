@@ -1,12 +1,20 @@
 import express from "express";
 import Database from "better-sqlite3";
-
+import session from "express-session";
 const port = 8000;
 const app = express();
 app.use(express.json());
 
-const db = new Database("./db/product-manager.db", { verbose: console.log });
+app.use(
+  session({
+    secret: "123", // 🔐 Change this to something secure
+    resave: false,
+    saveUninitialized: true,
+    cookie: { maxAge: 1000 * 60 * 60 * 24 }, // 1 day
+  })
+);
 
+const db = new Database("./db/product-manager.db", { verbose: console.log });
 // Generate slug
 function generateSlug(input) {
   return input
@@ -117,6 +125,82 @@ app.post("/api/products", (req, res) => {
     console.error("Error inserting product:", error);
     res.status(500).json({ error: "Failed to add product." });
   }
+});
+
+//Cart functionality
+app.get("/api/cart", (req, res) => {
+  const sessionId = req.sessionID;
+
+  const items = db
+    .prepare(
+      `
+    SELECT cart.id, products.name, products.price,products.image,products.category, cart.quantity
+    FROM cart
+    JOIN products ON cart.product_id = products.id
+    WHERE cart.session_id = ?
+  `
+    )
+    .all(sessionId);
+  console.log(items);
+  const total = items.reduce(
+    (sum, item) => sum + parseInt(item.price) * item.quantity,
+    0
+  );
+
+  res.json({ items, total });
+});
+//Add a product to cart
+app.post("/api/cart", (req, res) => {
+  const { productId } = req.body;
+  const sessionId = req.sessionID;
+
+  const existing = db
+    .prepare(
+      `
+    SELECT * FROM cart WHERE session_id = ? AND product_id = ?
+  `
+    )
+    .get(sessionId, productId);
+
+  if (existing) {
+    db.prepare(`UPDATE cart SET quantity = quantity + 1 WHERE id = ?`).run(
+      existing.id
+    );
+  } else {
+    db.prepare(
+      `INSERT INTO cart (product_id, quantity, session_id) VALUES (?, ?, ?)`
+    ).run(productId, 1, sessionId);
+  }
+
+  res.json({ message: "Added to cart" });
+});
+// 🔁 PUT /cart/:id – Update quantity of a cart item
+app.put("/api/cart/:id", (req, res) => {
+  const { quantity } = req.body;
+  const { id } = req.params;
+  const sessionId = req.sessionID;
+
+  db.prepare(
+    `
+    UPDATE cart SET quantity = ?
+    WHERE id = ? AND session_id = ?
+  `
+  ).run(quantity, id, sessionId);
+
+  res.json({ message: "Quantity updated" });
+});
+
+// ❌ DELETE /cart/:id – Remove item from cart
+app.delete("/api/cart/:id", (req, res) => {
+  const { id } = req.params;
+  const sessionId = req.sessionID;
+
+  db.prepare(`DELETE FROM cart WHERE id = ? AND session_id = ?`).run(
+    id,
+    sessionId
+  );
+
+  res.json({ message: "Item removed from cart" });
 });
 
 //app listen
