@@ -1,4 +1,4 @@
-<div class="d-flex flex-column flex-md-row">
+<!-- <div class="d-flex flex-column flex-md-row">
   <app-sidebar />
   <div class="flex-grow-1 mx-5 my-2">
     <h4 class="mt-2">New Products</h4>
@@ -14,7 +14,6 @@
           class="form-control"
           id="name"
           formControlName="name"
-          required
         />
       </div>
       <div class="col-md-6">
@@ -24,7 +23,6 @@
           class="form-control"
           id="price"
           formControlName="price"
-          required
         />
       </div>
       <div class="col-12">
@@ -34,7 +32,6 @@
           class="form-control"
           id="image"
           formControlName="image"
-          required
         />
       </div>
       <div class="col-12">
@@ -45,7 +42,6 @@
           id="description"
           placeholder="Describe about the product...."
           formControlName="description"
-          required
         />
       </div>
       <div class="col-md-6">
@@ -55,17 +51,11 @@
           class="form-control"
           id="date"
           formControlName="date"
-          required
         />
       </div>
       <div class="col-md-4">
         <label for="category" class="form-label">Category</label>
-        <select
-          id="category"
-          class="form-select"
-          formControlName="category"
-          required
-        >
+        <select id="category" class="form-select" formControlName="category">
           <option selected>Skin Care</option>
           <option>Perfume</option>
           <option>Lip Care</option>
@@ -80,12 +70,210 @@
           id="sku"
           pattern="[A-Z]{3}[0-9]{3}"
           formControlName="sku"
-          required
         />
       </div>
 
       <div class="col-12">
         <button type="submit" class="btn btn-success fw-bold mt-2">
+          ADD PRODUCT
+        </button>
+      </div>
+    </form>
+  </div>
+</div> -->
+<div class="d-flex flex-column flex-md-row">
+  <app-sidebar></app-sidebar>
+  <div class="flex-grow-1 mx-5 my-2">
+    <h4 class="mt-2">New Products</h4>
+    <form
+      [formGroup]="productForm"
+      (ngSubmit)="onSubmit()"
+      class="row g-3 w-75 mt-1"
+    >
+      <!-- Name -->
+      <div class="col-md-6">
+        <label for="name" class="form-label">Name</label>
+        <input
+          type="text"
+          class="form-control"
+          id="name"
+          formControlName="name"
+          [ngClass]="{
+            'is-invalid':
+              productForm.get('name')?.invalid &&
+              productForm.get('name')?.touched
+          }"
+        />
+        <div
+          class="invalid-feedback"
+          *ngIf="
+            productForm.get('name')?.invalid && productForm.get('name')?.touched
+          "
+        >
+          Name is required.
+        </div>
+      </div>
+
+      <!-- Price -->
+      <div class="col-md-6">
+        <label for="price" class="form-label">Price</label>
+        <input
+          type="number"
+          class="form-control"
+          id="price"
+          formControlName="price"
+          [ngClass]="{
+            'is-invalid':
+              productForm.get('price')?.invalid &&
+              productForm.get('price')?.touched
+          }"
+        />
+        <div
+          class="invalid-feedback"
+          *ngIf="
+            productForm.get('price')?.invalid &&
+            productForm.get('price')?.touched
+          "
+        >
+          Price is required.
+        </div>
+      </div>
+
+      <!-- Image -->
+      <div class="col-12">
+        <label for="image" class="form-label">Image</label>
+        <input
+          type="text"
+          class="form-control"
+          id="image"
+          formControlName="image"
+          [ngClass]="{
+            'is-invalid':
+              productForm.get('image')?.invalid &&
+              productForm.get('image')?.touched
+          }"
+        />
+        <div
+          class="invalid-feedback"
+          *ngIf="
+            productForm.get('image')?.invalid &&
+            productForm.get('image')?.touched
+          "
+        >
+          Image is required.
+        </div>
+      </div>
+
+      <!-- Description -->
+      <div class="col-12">
+        <label for="description" class="form-label">Description</label>
+        <input
+          type="text"
+          class="form-control"
+          id="description"
+          placeholder="Describe about the product...."
+          formControlName="description"
+          [ngClass]="{
+            'is-invalid':
+              productForm.get('description')?.invalid &&
+              productForm.get('description')?.touched
+          }"
+        />
+        <div
+          class="invalid-feedback"
+          *ngIf="
+            productForm.get('description')?.invalid &&
+            productForm.get('description')?.touched
+          "
+        >
+          Description is required.
+        </div>
+      </div>
+
+      <!-- Date -->
+      <div class="col-md-6">
+        <label for="date" class="form-label">Date</label>
+        <input
+          type="date"
+          class="form-control"
+          id="date"
+          formControlName="date"
+          [ngClass]="{
+            'is-invalid':
+              productForm.get('date')?.invalid &&
+              productForm.get('date')?.touched
+          }"
+        />
+        <div
+          class="invalid-feedback"
+          *ngIf="
+            productForm.get('date')?.invalid && productForm.get('date')?.touched
+          "
+        >
+          Date is required.
+        </div>
+      </div>
+
+      <!-- Category -->
+      <div class="col-md-4">
+        <label for="category" class="form-label">Category</label>
+        <select
+          id="category"
+          class="form-select"
+          formControlName="category"
+          [ngClass]="{
+            'is-invalid':
+              productForm.get('category')?.invalid &&
+              productForm.get('category')?.touched
+          }"
+        >
+          <option selected>Skin Care</option>
+          <option>Perfume</option>
+          <option>Lip Care</option>
+          <option>Nail Care</option>
+        </select>
+        <div
+          class="invalid-feedback"
+          *ngIf="
+            productForm.get('category')?.invalid &&
+            productForm.get('category')?.touched
+          "
+        >
+          Category is required.
+        </div>
+      </div>
+
+      <!-- SKU -->
+      <div class="col-md-2">
+        <label for="sku" class="form-label">SKU</label>
+        <input
+          type="text"
+          class="form-control"
+          id="sku"
+          pattern="[A-Z]{3}[0-9]{3}"
+          formControlName="sku"
+          [ngClass]="{
+            'is-invalid':
+              productForm.get('sku')?.invalid && productForm.get('sku')?.touched
+          }"
+        />
+        <div
+          class="invalid-feedback"
+          *ngIf="
+            productForm.get('sku')?.invalid && productForm.get('sku')?.touched
+          "
+        >
+          SKU should be in format: ABC123.
+        </div>
+      </div>
+
+      <!-- Submit Button -->
+      <div class="col-12">
+        <button
+          type="submit"
+          class="btn btn-success fw-bold mt-2"
+          [disabled]="productForm.invalid"
+        >
           ADD PRODUCT
         </button>
       </div>

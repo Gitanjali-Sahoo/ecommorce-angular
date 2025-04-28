@@ -10,8 +10,13 @@ export class ProductService {
   private http = inject(HttpClient);
 
   //Get all products
-  getAllProducts(): Observable<Product[]> {
-    return this.http.get<Product[]>('/api/products');
+  getAllProducts(): Observable<{
+    products: Product[];
+    visibleProducts: Product[];
+  }> {
+    return this.http.get<{ products: Product[]; visibleProducts: Product[] }>(
+      '/api/products'
+    );
   }
 
   //Get a product by id

@@ -57,7 +57,7 @@ app.get("/api/products", (req, res) => {
     // Filter out the products that are marked to be hidden
   });
   const visibleProducts = products.filter((product) => !product.hide);
-  res.json(visibleProducts);
+  res.json({ visibleProducts, products });
 });
 
 // Get a product by id

@@ -9,4 +9,5 @@ export interface Product {
   slug: string;
   createdAt: string;
   isNew: boolean;
+  hide: boolean;
 }

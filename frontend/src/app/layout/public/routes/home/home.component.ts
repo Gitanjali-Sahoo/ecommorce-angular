@@ -23,8 +23,9 @@ export class HomeComponent {
   products: Product[] = [];
 
   ngOnInit() {
-    this.productService.getAllProducts().subscribe((products) => {
-      this.products = products;
+    this.productService.getAllProducts().subscribe((response) => {
+      this.products = response.visibleProducts;
+      console.log(this.products);
     });
   }
 }

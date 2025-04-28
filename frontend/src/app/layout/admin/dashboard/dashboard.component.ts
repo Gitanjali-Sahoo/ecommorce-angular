@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import { ActivatedRoute, RouterModule } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { SidebarComponent } from '../sidebar/sidebar.component';
 import { ProductService } from '../../../services/product.service';
 import { Product } from '../../../types/Product';
@@ -17,8 +17,8 @@ export class DashboardComponent {
   message!: string;
 
   ngOnInit() {
-    this.productService.getAllProducts().subscribe((products) => {
-      this.products = products;
+    this.productService.getAllProducts().subscribe((response) => {
+      this.products = response.products;
     });
   }
 
