@@ -6,4 +6,5 @@ export interface Cart {
   category: string;
   createdAt: string;
   quantity: number;
+  product_id: number;
 }

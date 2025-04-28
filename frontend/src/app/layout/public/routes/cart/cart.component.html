@@ -6,8 +6,25 @@
     <div class="col-lg-8">
       <div class="card">
         <div class="card-body">
-          <h4 class="card-title">Items in Cart</h4>
-
+          <!-- <div *ngIf="cartProducts.length > 0; else elseBlock">
+            Content to render when condition is true.
+          </div>
+          <ng-template #elseBlock
+            >Content to render when condition is false.</ng-template
+          > -->
+          <h4
+            class="card-title"
+            *ngIf="cartProducts.length > 0; else elseBlock"
+          >
+            Items in Cart
+          </h4>
+          <ng-template #elseBlock
+            ><a
+              class="text-decoration-none text-black fw-bold fs-5 text-center"
+              routerLink="/"
+              >Back to Shopping <i class="bi bi-arrow-right-circle"></i
+            ></a>
+          </ng-template>
           <!-- Cart item -->
           <div
             class="row mb-3 border-bottom pb-3"
@@ -21,7 +38,9 @@
               />
             </div>
             <div class="col-6">
-              <h5>{{ product.name }}</h5>
+              <h5 [routerLink]="['/products', product.product_id]">
+                {{ product.name }}
+              </h5>
               <p>{{ product.category }}</p>
             </div>
             <div class="col-3 text-end">
@@ -39,7 +58,7 @@
               <!-- Delete Icon -->
               <button
                 class="btn btn-danger mt-2"
-                (click)="removeItemFromCart(product.id)"
+                (click)="removeItemFromCart(product.id, product.name)"
               >
                 <i class="bi bi-trash3"></i> Remove
               </button>
@@ -63,7 +82,7 @@
             </li>
             <li class="d-flex justify-content-between">
               <span>Tax (5%)</span>
-              <span>{{ total * 0.05 }}</span>
+              <span>{{ (total * 0.05).toFixed(2) }}</span>
             </li>
             <li class="d-flex justify-content-between">
               <span><strong>Total</strong></span>
@@ -76,6 +95,30 @@
             Proceed to Checkout
           </button>
         </div>
+      </div>
+    </div>
+  </div>
+  <div
+    class="toast-container position-fixed bottom-0 end-0 p-3"
+    style="z-index: 1055"
+  >
+    <div
+      *ngIf="message"
+      class="toast align-items-center text-bg-success border-0 show"
+      role="alert"
+      aria-live="assertive"
+      aria-atomic="true"
+    >
+      <div class="d-flex">
+        <div class="toast-body">
+          {{ message }}
+        </div>
+        <button
+          type="button"
+          class="btn-close btn-close-white me-2 m-auto"
+          (click)="message = ''"
+          aria-label="Close"
+        ></button>
       </div>
     </div>
   </div>

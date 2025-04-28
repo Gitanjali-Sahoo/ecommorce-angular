@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { SidebarComponent } from '../sidebar/sidebar.component';
 import { ProductService } from '../../../services/product.service';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-new-product',
@@ -12,7 +13,7 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 export class NewProductComponent {
   private productService = inject(ProductService);
   productForm!: FormGroup;
-
+  private router = inject(Router);
   ngOnInit() {
     this.productForm = new FormGroup({
       name: new FormControl(''),
@@ -29,5 +30,7 @@ export class NewProductComponent {
     this.productService.postNewProduct(product).subscribe((response) => {
       const message = response.message;
     });
+    this.productForm.reset('');
+    this.router.navigate(['/']);
   }
 }

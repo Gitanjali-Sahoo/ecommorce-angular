@@ -11,9 +11,12 @@
           class="badge rounded-pill text-bg-light position-absolute"
           >New</span
         >
+        <span class="likes text-white position-absolute hover-zoom"
+          ><i class="bi bi-suit-heart fs-4"></i
+        ></span>
         <img
-          [src]="product.image + '&w=400&h=400&fit=crop'"
-          class="card-img-top"
+          [src]="product.image"
+          class="card-img-top card-image"
           [alt]="product.name"
         />
         <div class="card-body">

@@ -1,7 +1,21 @@
-/* .card img {
-  height: 350px;
-} */
+.card-image {
+  height: 400px;
+  object-fit: fill;
+  width: 100%;
+}
 .badge {
   left: 1em;
   top: 1em;
+}
+.likes {
+  right: 1em;
+  bottom: 9em;
+  cursor: pointer;
+}
+.likes:hover {
+  transform: scale(1.2);
+  transition: all 0.3s ease;
+  .bi {
+    color: red;
+  }
 }

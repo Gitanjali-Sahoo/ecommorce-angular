@@ -13,6 +13,7 @@
       <p class="mb-1">{{ product.category }}</p>
       <h2 class="fw-bold">{{ product.name }}</h2>
       <h4 class="text-success fw-semibold mb-3">{{ product.price }} SEK</h4>
+
       <button
         class="btn btn-dark fw-bold px-4 py-2 mb-3"
         (click)="addProductToCart()"
@@ -30,5 +31,31 @@
   <div class="mt-5">
     <h4 class="mb-3">More about the product</h4>
     <p class="text-secondary">{{ product.description }}</p>
+  </div>
+
+  <!-- Toast Container (bottom-right) -->
+  <div
+    class="toast-container position-fixed bottom-0 end-0 p-3"
+    style="z-index: 1055"
+  >
+    <div
+      *ngIf="message"
+      class="toast align-items-center text-bg-success border-0 show"
+      role="alert"
+      aria-live="assertive"
+      aria-atomic="true"
+    >
+      <div class="d-flex">
+        <div class="toast-body">
+          {{ message }}
+        </div>
+        <button
+          type="button"
+          class="btn-close btn-close-white me-2 m-auto"
+          (click)="message = ''"
+          aria-label="Close"
+        ></button>
+      </div>
+    </div>
   </div>
 </div>

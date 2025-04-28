@@ -134,7 +134,7 @@ app.get("/api/cart", (req, res) => {
   const items = db
     .prepare(
       `
-    SELECT cart.id, products.name, products.price,products.image,products.category, cart.quantity
+    SELECT cart.id, products.name, products.price,products.image,products.category, cart.quantity, cart.product_id
     FROM cart
     JOIN products ON cart.product_id = products.id
     WHERE cart.session_id = ?
@@ -172,7 +172,7 @@ app.post("/api/cart", (req, res) => {
     ).run(productId, 1, sessionId);
   }
 
-  res.json({ message: "Added to cart" });
+  res.json({ message: "Product successfully added to your cart!" });
 });
 // 🔁 PUT /cart/:id – Update quantity of a cart item
 app.put("/api/cart/:id", (req, res) => {
@@ -200,7 +200,7 @@ app.delete("/api/cart/:id", (req, res) => {
     sessionId
   );
 
-  res.json({ message: "Item removed from cart" });
+  res.json({ message: "removed from cart" });
 });
 
 //app listen

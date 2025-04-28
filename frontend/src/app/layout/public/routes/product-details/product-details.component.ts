@@ -16,16 +16,21 @@ export class ProductDetailsComponent {
   private cartSerive = inject(CartServiceService);
   private route = inject(ActivatedRoute);
   product!: Product;
+  message!: string;
   ngOnInit() {
     const id = Number(this.route.snapshot.paramMap.get('id'));
     this.productService.getProductById(id).subscribe((product) => {
       this.product = product;
     });
   }
+
   addProductToCart() {
     const id = Number(this.route.snapshot.paramMap.get('id'));
     this.cartSerive.postProductToCart(id).subscribe((response) => {
-      console.log(response);
+      this.message = response.message;
+      setTimeout(() => {
+        this.message = '';
+      }, 2000);
     });
   }
 }
