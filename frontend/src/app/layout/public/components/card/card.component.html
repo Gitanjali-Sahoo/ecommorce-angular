@@ -1,10 +1,22 @@
 <div>
-  <div class="text-center mt-3">
+  <div class="text-center mt-3" *ngIf="!isFiltered">
     <p>POPULAR PRODUCTS</p>
     <h2 class="fs-1">Trending Now</h2>
   </div>
+  <div
+    class="text-center mt-3"
+    *ngIf="isFiltered && filteredProducts.length > 0"
+  >
+    <h3>{{ filteredProducts.length }} Products Found</h3>
+  </div>
+  <h2
+    *ngIf="isFiltered && filteredProducts.length === 0"
+    class="fs-1 text-center mt-3"
+  >
+    No Products Found
+  </h2>
   <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-3 m-2">
-    <div class="col" *ngFor="let product of products">
+    <div class="col" *ngFor="let product of filteredProducts">
       <div class="card">
         <span
           *ngIf="product.isNew"

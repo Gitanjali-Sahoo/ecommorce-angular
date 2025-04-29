@@ -6,6 +6,9 @@ import { MainLayoutComponent } from './layout/public/main-layout/main-layout.com
 import { HomeComponent } from './layout/public/routes/home/home.component';
 import { ProductDetailsComponent } from './layout/public/routes/product-details/product-details.component';
 import { CartComponent } from './layout/public/routes/cart/cart.component';
+import { AboutComponent } from './layout/public/routes/about/about.component';
+import { ContactComponent } from './layout/public/routes/contact/contact.component';
+import { CheckOutComponent } from './layout/public/routes/check-out/check-out.component';
 
 export const routes: Routes = [
   {
@@ -29,6 +32,9 @@ export const routes: Routes = [
       { path: '', component: HomeComponent },
       { path: 'products/:id', component: ProductDetailsComponent },
       { path: 'cart', component: CartComponent },
+      { path: 'about', component: AboutComponent },
+      { path: 'contact', component: ContactComponent },
+      { path: 'check-out', component: CheckOutComponent },
     ],
   },
 ];

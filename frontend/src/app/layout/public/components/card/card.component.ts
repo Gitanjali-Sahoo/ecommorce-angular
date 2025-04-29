@@ -10,5 +10,7 @@ import { Product } from '../../../../types/Product';
   styleUrl: './card.component.css',
 })
 export class CardComponent {
-  @Input() products: Product[] = [];
+  // @Input() products: Product[] = [];
+  @Input() filteredProducts: Product[] = [];
+  @Input() isFiltered!: boolean;
 }

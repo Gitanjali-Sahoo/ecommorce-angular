@@ -5,6 +5,8 @@ import { ProductService } from '../../../../services/product.service';
 import { ChooseUsComponent } from '../../components/choose-us/choose-us.component';
 import { HeroImageComponent } from '../../components/hero-image/hero-image.component';
 import { SpotComponent } from '../../components/spot/spot.component';
+import { routes } from '../../../../app.routes';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -19,13 +21,28 @@ import { SpotComponent } from '../../components/spot/spot.component';
 })
 export class HomeComponent {
   private productService = inject(ProductService);
-
   products: Product[] = [];
+  filteredProducts: Product[] = [];
+  private route = inject(ActivatedRoute);
+  isFiltered: boolean = false;
 
   ngOnInit() {
     this.productService.getAllProducts().subscribe((response) => {
       this.products = response.visibleProducts;
-      console.log(this.products);
+
+      this.route.queryParams.subscribe((params) => {
+        const query = params['query'] || '';
+
+        if (query) {
+          this.filteredProducts = this.products.filter((product) =>
+            product.name.toLowerCase().includes(query.toLowerCase())
+          );
+          this.isFiltered = true;
+        } else {
+          this.filteredProducts = this.products;
+          this.isFiltered = false;
+        }
+      });
     });
   }
 }
