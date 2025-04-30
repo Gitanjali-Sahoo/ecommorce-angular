@@ -30,8 +30,8 @@
           [alt]="product.name"
         />
         <span class="likes text-white position-absolute hover-zoom"
-          ><i class="bi bi-suit-heart fs-4"></i
-        ></span>
+          ><i class="bi bi-suit-heart-fill"></i>
+        </span>
         <div class="card-body d-flex flex-column">
           <h5 class="card-title cursor-pointer">
             <a
@@ -55,31 +55,6 @@
             <span class="text-white hover-zoom"><i class="bi bi-bag"></i></span>
           </div>
         </div>
-      </div>
-    </div>
-  </div>
-  <!-- Toast Container (bottom-right) -->
-  <div
-    class="toast-container position-fixed bottom-0 end-0 p-3"
-    style="z-index: 1055"
-  >
-    <div
-      *ngIf="message"
-      class="toast align-items-center text-bg-success border-0 show"
-      role="alert"
-      aria-live="assertive"
-      aria-atomic="true"
-    >
-      <div class="d-flex">
-        <div class="toast-body">
-          {{ message }}
-        </div>
-        <button
-          type="button"
-          class="btn-close btn-close-white me-2 m-auto"
-          (click)="message = ''"
-          aria-label="Close"
-        ></button>
       </div>
     </div>
   </div>
