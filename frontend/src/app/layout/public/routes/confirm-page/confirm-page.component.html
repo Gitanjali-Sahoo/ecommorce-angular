@@ -23,19 +23,20 @@
                   <strong>{{ item.name }}</strong> <br />
                   <small>Quantity: {{ item.quantity }}</small>
                 </div>
-                <span>SEK hh</span>
+                <span>SEK {{ +item.price * item.quantity }}</span>
               </li>
               <li class="list-group-item d-flex justify-content-between">
-                <strong>Total</strong>
-                <strong>SEK {{ total }}</strong>
+                <div>
+                  <strong>Total</strong><br />
+                  <p class="fw-lighter tax">Including Tax</p>
+                </div>
+
+                <strong>SEK {{ (total * 1.05).toFixed(2) }}</strong>
               </li>
             </ul>
           </div>
 
-          <a
-            routerLink="/products"
-            class="btn btn-primary mt-3 rounded-pill px-4"
-          >
+          <a routerLink="/" class="btn btn-primary mt-3 rounded-pill px-4">
             Continue Shopping
           </a>
         </div>

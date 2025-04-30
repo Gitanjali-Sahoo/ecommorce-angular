@@ -3,10 +3,11 @@ import { CartServiceService } from '../../../../cartService/cart-service.service
 import { Cart } from '../../../../types/Cart';
 import { CartResponse } from '../../../../types/CartResponse';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-confirm-page',
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './confirm-page.component.html',
   styleUrl: './confirm-page.component.css',
 })

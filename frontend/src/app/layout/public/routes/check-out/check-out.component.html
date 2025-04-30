@@ -1,6 +1,6 @@
 <div class="container my-5">
   <h2 class="text-center mb-4">Checkout</h2>
-  <div class="row">
+  <div class="row" *ngIf="cartProducts.length > 0; else noCartProduct">
     <div class="row">
       <!-- Cart items -->
       <div class="col-lg-8">
@@ -67,16 +67,16 @@
             <ul class="list-unstyled">
               <li class="d-flex justify-content-between">
                 <span>Subtotal</span>
-                <span>{{ total }}</span>
+                <span>SEK {{ total }} </span>
               </li>
               <li class="d-flex justify-content-between">
                 <span>Tax (5%)</span>
-                <span>{{ (total * 0.05).toFixed(2) }}</span>
+                <span>SEK {{ (total * 0.05).toFixed(2) }} </span>
               </li>
               <li class="d-flex justify-content-between">
                 <span><strong>Total</strong></span>
                 <span
-                  ><strong>{{ (total * 1.05).toFixed(2) }}</strong></span
+                  ><strong>SEK {{ (total * 1.05).toFixed(2) }}</strong></span
                 >
               </li>
             </ul>
@@ -129,7 +129,7 @@
 
             <button
               type="submit"
-              class="btn btn-success w-100 mt-3"
+              class="btn btn-dark w-100 mt-3"
               routerLink="/confirm-page"
             >
               Place Order
@@ -139,4 +139,12 @@
       </div>
     </div>
   </div>
+  <ng-template #noCartProduct>
+    <h3 class="text-center">No products for Checkout</h3>
+    <a
+      class="text-decoration-none text-black fw-bold fs-5 text-center"
+      routerLink="/"
+      >Back to Shopping <i class="bi bi-arrow-right-circle"></i
+    ></a>
+  </ng-template>
 </div>

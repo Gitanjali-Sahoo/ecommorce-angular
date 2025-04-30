@@ -9,13 +9,21 @@
 }
 .likes {
   right: 1em;
-  bottom: 9em;
+  bottom: 11em;
   cursor: pointer;
 }
 .likes:hover {
   transform: scale(1.2);
   transition: all 0.3s ease;
   .bi {
-    color: red;
+    color: #3f0091;
   }
+}
+.cart {
+  background-color: #9a77c8;
+  width: 100%;
+  cursor: pointer;
+}
+.cart:hover {
+  background-color: #844ad0;
 }
