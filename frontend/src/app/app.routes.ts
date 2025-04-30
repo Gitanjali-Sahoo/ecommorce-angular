@@ -9,6 +9,7 @@ import { CartComponent } from './layout/public/routes/cart/cart.component';
 import { AboutComponent } from './layout/public/routes/about/about.component';
 import { ContactComponent } from './layout/public/routes/contact/contact.component';
 import { CheckOutComponent } from './layout/public/routes/check-out/check-out.component';
+import { ConfirmPageComponent } from './layout/public/routes/confirm-page/confirm-page.component';
 
 export const routes: Routes = [
   {
@@ -35,6 +36,7 @@ export const routes: Routes = [
       { path: 'about', component: AboutComponent },
       { path: 'contact', component: ContactComponent },
       { path: 'check-out', component: CheckOutComponent },
+      { path: 'confirm-page', component: ConfirmPageComponent },
     ],
   },
 ];

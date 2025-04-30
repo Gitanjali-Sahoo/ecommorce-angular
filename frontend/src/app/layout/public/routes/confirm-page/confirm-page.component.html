@@ -1,0 +1,45 @@
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6 text-center">
+      <div class="card shadow rounded-4 p-4">
+        <div class="card-body">
+          <div class="mb-4 text-success">
+            <i class="bi bi-check-circle-fill" style="font-size: 4rem"></i>
+          </div>
+          <h2 class="fw-bold mb-3">Thank You for Your Purchase!</h2>
+          <p class="text-muted">
+            Your order has been successfully placed. A confirmation email has
+            been sent to your inbox.
+          </p>
+
+          <div class="mt-4 text-start">
+            <h5 class="fw-semibold">Order Summary</h5>
+            <ul class="list-group list-group-flush mb-3">
+              <li
+                class="list-group-item d-flex justify-content-between align-items-center"
+                *ngFor="let item of cartProducts"
+              >
+                <div>
+                  <strong>{{ item.name }}</strong> <br />
+                  <small>Quantity: {{ item.quantity }}</small>
+                </div>
+                <span>SEK hh</span>
+              </li>
+              <li class="list-group-item d-flex justify-content-between">
+                <strong>Total</strong>
+                <strong>SEK {{ total }}</strong>
+              </li>
+            </ul>
+          </div>
+
+          <a
+            routerLink="/products"
+            class="btn btn-primary mt-3 rounded-pill px-4"
+          >
+            Continue Shopping
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

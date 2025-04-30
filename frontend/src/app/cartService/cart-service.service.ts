@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { CartResponse } from '../types/CartResponse';
+import { Cart } from '../types/Cart';
 
 @Injectable({
   providedIn: 'root',
@@ -23,5 +24,11 @@ export class CartServiceService {
   }
   deleteProductToCart(id: number): Observable<{ message: string }> {
     return this.http.delete<{ message: string }>(`/api/cart/${id}`);
+  }
+  calculateTotal(items: Cart[]): number {
+    return items.reduce(
+      (sum, item) => sum + Number(item.price) * item.quantity,
+      0
+    );
   }
 }

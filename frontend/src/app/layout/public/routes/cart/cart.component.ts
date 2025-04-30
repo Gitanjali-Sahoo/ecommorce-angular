@@ -25,16 +25,12 @@ export class CartComponent {
       console.log(this.cartProducts);
     });
   }
-  calculateTotal() {
-    this.total = this.cartProducts.reduce((sum, item: Cart) => {
-      return sum + Number(item.price) * item.quantity;
-    }, 0);
-  }
+
   updateCart(product: Cart) {
     this.cartService
       .updateProductToCart(product.id, product.quantity)
       .subscribe((response) => {
-        this.calculateTotal();
+        this.total = this.cartService.calculateTotal(this.cartProducts);
         console.log(response);
       });
   }
@@ -48,7 +44,7 @@ export class CartComponent {
       this.cartProducts = this.cartProducts.filter(
         (product) => product.id !== id
       );
-      this.calculateTotal();
+      this.total = this.cartService.calculateTotal(this.cartProducts);
     });
   }
 }
