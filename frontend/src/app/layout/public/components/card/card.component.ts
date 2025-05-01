@@ -13,12 +13,10 @@ import { CartServiceService } from '../../../../cartService/cart-service.service
 export class CardComponent {
   @Input() filteredProducts: Product[] = [];
   @Input() isFiltered!: boolean;
-  private route = inject(ActivatedRoute);
   private cartService = inject(CartServiceService);
   message!: string;
 
   addProductToCart(id: number) {
-    // const id = Number(this.route.snapshot.paramMap.get('id'));
     this.cartService.postProductToCart(id).subscribe((response) => {
       this.message = response.message;
       console.log(this.message);
