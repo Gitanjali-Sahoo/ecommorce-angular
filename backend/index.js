@@ -1,8 +1,11 @@
 import express from "express";
 import Database from "better-sqlite3";
 import session from "express-session";
-const port = 8000;
+import cors from "cors";
+// const port = 8000;
+const PORT = process.env.PORT || 8000;
 const app = express();
+app.use(cors());
 app.use(express.json());
 
 app.use(
@@ -11,7 +14,7 @@ app.use(
     resave: false,
     saveUninitialized: true,
     cookie: { maxAge: 1000 * 60 * 60 * 24 }, // 1 day
-  })
+  }),
 );
 
 const db = new Database("./db/product-manager.db", { verbose: console.log });
@@ -38,7 +41,7 @@ app.get("/api/products", (req, res) => {
       category,
       slug,
       createdAt FROM products
-    `
+    `,
     )
     .all();
   // Get current date for comparing product age
@@ -127,6 +130,21 @@ app.post("/api/products", (req, res) => {
   }
 });
 
+// Change a product using PUT method in DB
+app.put("/api/products/:id", (req, res) => {
+  const { name } = req.body;
+  const { id } = req.params;
+
+  db.prepare(
+    `
+    UPDATE products SET name = ?
+    WHERE id = ?
+  `,
+  ).run(name, id);
+
+  res.json({ message: "product name updated" });
+});
+
 //Cart functionality
 app.get("/api/cart", (req, res) => {
   const sessionId = req.sessionID;
@@ -138,13 +156,13 @@ app.get("/api/cart", (req, res) => {
     FROM cart
     JOIN products ON cart.product_id = products.id
     WHERE cart.session_id = ?
-  `
+  `,
     )
     .all(sessionId);
   console.log(items);
   const total = items.reduce(
     (sum, item) => sum + parseInt(item.price) * item.quantity,
-    0
+    0,
   );
 
   res.json({ items, total });
@@ -158,17 +176,17 @@ app.post("/api/cart", (req, res) => {
     .prepare(
       `
     SELECT * FROM cart WHERE session_id = ? AND product_id = ?
-  `
+  `,
     )
     .get(sessionId, productId);
 
   if (existing) {
     db.prepare(`UPDATE cart SET quantity = quantity + 1 WHERE id = ?`).run(
-      existing.id
+      existing.id,
     );
   } else {
     db.prepare(
-      `INSERT INTO cart (product_id, quantity, session_id) VALUES (?, ?, ?)`
+      `INSERT INTO cart (product_id, quantity, session_id) VALUES (?, ?, ?)`,
     ).run(productId, 1, sessionId);
   }
 
@@ -184,7 +202,7 @@ app.put("/api/cart/:id", (req, res) => {
     `
     UPDATE cart SET quantity = ?
     WHERE id = ? AND session_id = ?
-  `
+  `,
   ).run(quantity, id, sessionId);
 
   res.json({ message: "Quantity updated" });
@@ -197,13 +215,14 @@ app.delete("/api/cart/:id", (req, res) => {
 
   db.prepare(`DELETE FROM cart WHERE id = ? AND session_id = ?`).run(
     id,
-    sessionId
+    sessionId,
   );
 
   res.json({ message: "removed from cart" });
 });
 
 //app listen
-app.listen(port, () => {
-  console.log(`app is listening on port ${port}`);
+
+app.listen(PORT, () => {
+  console.log(`app is listening on port ${PORT}`);
 });
