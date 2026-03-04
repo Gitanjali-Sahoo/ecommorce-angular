@@ -41,4 +41,12 @@ export class DashboardComponent {
       }, 2000);
     });
   }
+  handleUpdate(id: number, name: string) {
+    this.productService.updateProduct(id, name).subscribe((response) => {
+      this.message = response.message;
+      setTimeout(() => {
+        this.message = '';
+      }, 2000);
+    });
+  }
 }

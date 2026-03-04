@@ -26,7 +26,17 @@
       <tbody *ngFor="let product of products; let i = index">
         <tr>
           <th scope="row">{{ i + 1 }}</th>
-          <td>{{ product.name }}</td>
+          <td>
+            <input
+              #inputRef
+              class="border-0"
+              type="text"
+              name="name"
+              id="name"
+              [value]="product.name"
+              (change)="handleUpdate(product.id, inputRef.value)"
+            />
+          </td>
           <td>{{ product.sku }}</td>
           <td>{{ product.price }} Sek</td>
           <td class="text-center">
